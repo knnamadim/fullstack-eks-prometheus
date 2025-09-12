@@ -1,0 +1,36 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: pulsar-es
+  namespace: logging
+spec:
+  version: 8.10.0
+  nodeSets:
+    - name: default
+      count: 3
+      config:
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+
+---
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: pulsar-kb
+  namespace: logging
+spec:
+  version: 8.10.0
+  count: 1
+  elasticsearchRef:
+    name: pulsar-es
+  http:
+    service:
+      spec:
+        type: LoadBalancer

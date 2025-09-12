@@ -1,0 +1,8 @@
+replicaCount: 1
+
+image:
+  repository: <your-docker-repo>/pulsar-consumer
+  tag: latest
+  pullPolicy: Always
+
+namespace: pulsar

@@ -1,0 +1,15 @@
+bookkeeper:
+  bookieCount: 3
+
+broker:
+  replicas: 3
+  jmxMetricsEnabled: true
+  jmxPort: 8080
+
+proxy:
+  replicas: 2
+
+zookeeper:
+  replicas: 3
+
+clusterName: pulsar-cluster
